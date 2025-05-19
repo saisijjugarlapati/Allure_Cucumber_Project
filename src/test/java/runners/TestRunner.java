@@ -5,8 +5,11 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
     features = "src/test/resources/features",
-    glue = {"stepDefinitions"},
-    plugin = {"pretty", "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"},
+    glue = {"stepDefinitions","hooks"},
+    plugin = {"pretty",
+            "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm",
+            "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+            "html:target/cucumber-html-report" },
     monochrome = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
