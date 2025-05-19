@@ -56,12 +56,12 @@
             <version>5.1.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter -->
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports-testng-adapter</artifactId>
-            <version>1.0.7</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.aventstack/extentreports-testng-adapter &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.aventstack</groupId>-->
+<!--            <artifactId>extentreports-testng-adapter</artifactId>-->
+<!--            <version>1.0.7</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter -->
         <dependency>
@@ -79,9 +79,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
                     <systemPropertyVariables>
                         <allure.results.directory>target/allure-results</allure.results.directory>
                     </systemPropertyVariables>
