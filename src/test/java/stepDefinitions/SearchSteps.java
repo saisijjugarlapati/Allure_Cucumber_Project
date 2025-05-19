@@ -12,20 +12,24 @@ import static org.testng.Assert.assertTrue;
 
 public class SearchSteps {
 
-    WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     String keyword;
+
+    public static WebDriver getDriver() {
+        return driver.get();
+    }
 
     @Given("I open DuckDuckGo search engine")
     public void openDuckDuckGo() {
-        driver = new ChromeDriver();
-        driver.get("https://duckduckgo.com");
+        driver.set(new ChromeDriver());
+        getDriver().get("https://duckduckgo.com");
     }
 
     @Step("Searching for: {keyword}")
     @When("I search for {string}")
     public void searchForKeyword(String keyword) {
         this.keyword = keyword;
-        WebElement searchBox = driver.findElement(By.name("q"));
+        WebElement searchBox = getDriver().findElement(By.name("q"));
         searchBox.sendKeys(keyword);
         searchBox.submit();
     }
@@ -33,10 +37,10 @@ public class SearchSteps {
     @Step("Verifying results contain: {keyword}")
     @Then("I should see results related to {string}")
     public void verifyResults(String keyword) {
-        String pageText = driver.getPageSource().toLowerCase();
+        String pageText = getDriver().getPageSource().toLowerCase();
         savePageSource(pageText);
         assertTrue(pageText.contains(keyword.toLowerCase()), "Keyword not found in search results!");
-        driver.quit();
+        getDriver().quit();
     }
 
     @Attachment(value = "Page Source", type = "text/html")
